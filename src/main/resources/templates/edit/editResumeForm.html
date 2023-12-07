@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .form-control {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .container {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+
+    </th:block>
+
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+
+        <script th:inline="javascript">
+            $(document).ready(function(){
+                let errorMessage = [[${errorMessage}]];  // [[${errorMessage}]] : 변수 내용 출력
+                if(errorMessage != null){
+                    alert(errorMessage);
+                }
+            });
+
+        </script>
+    </th:block>
+</head>
+<body>
+<section style="display: flex;">
+    <div layout:fragment="content">
+        <div class="container">
+            <h2 class="text-center mt-5">이력서 관리</h2>
+            <form action="/edit/resume" method="post" class="mt-5" th:object="${resumeFormDto}">
+                <div class="form-group">
+                <label th:for="skill1">기술스택1</label>
+                <select th:id="skill1" th:field="*{skillDto.skill1}" class="form-control">
+                    <option value="none">기술 스택1</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Java">Java</option>
+                    <option value="Golang">Golang</option>
+                    <option value="Python">Python</option>
+                    <option value="C#">C#</option>
+                    <option value="C++">C++</option>
+                    <option value="Erlang">Erlang</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Swift">Swift</option>
+                    <option value="Kotlin">Kotlin</option>
+                    <option value="Scala">Scala</option>
+                    <option value="TypeScript">TypeScript</option>
+                    <option value="Rust">Rust</option>
+                    <option value="R">R</option>
+                    <option value="MATLAB">MATLAB</option>
+                    <option value="Perl">Perl</option>
+                    <option value="Lua">Lua</option>
+                    <option value="Groovy">Groovy</option>
+                    <option value="Shell">Shell</option>
+                    <option value="HTML">HTML</option>
+                    <option value="CSS">CSS</option>
+                    <option value="SQL">SQL</option>
+                    <option value="Spring">Spring</option>
+                </select>
+                    <input type="number" th:field="*{skillDto.per1}" min="0" max="100" placeholder="역량을 백분위로 나타내주세요." step="5" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="skill2">기술스택2</label>
+                    <select th:id="skill2" th:field="*{skillDto.skill2}" class="form-control">
+                        <option value="none">기술 스택2</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Java">Java</option>
+                        <option value="Golang">Golang</option>
+                        <option value="Python">Python</option>
+                        <option value="C#">C#</option>
+                        <option value="C++">C++</option>
+                        <option value="Erlang">Erlang</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Scala">Scala</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Rust">Rust</option>
+                        <option value="R">R</option>
+                        <option value="MATLAB">MATLAB</option>
+                        <option value="Perl">Perl</option>
+                        <option value="Lua">Lua</option>
+                        <option value="Groovy">Groovy</option>
+                        <option value="Shell">Shell</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                    <input type="number" th:field="*{skillDto.per2}" min="0" max="100" placeholder="역량을 백분위로 나타내주세요." step="5" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="skill3">기술스택3</label>
+                    <select th:id="skill3" th:field="*{skillDto.skill3}" class="form-control">
+                        <option value="none">기술 스택3</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Java">Java</option>
+                        <option value="Golang">Golang</option>
+                        <option value="Python">Python</option>
+                        <option value="C#">C#</option>
+                        <option value="C++">C++</option>
+                        <option value="Erlang">Erlang</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Scala">Scala</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Rust">Rust</option>
+                        <option value="R">R</option>
+                        <option value="MATLAB">MATLAB</option>
+                        <option value="Perl">Perl</option>
+                        <option value="Lua">Lua</option>
+                        <option value="Groovy">Groovy</option>
+                        <option value="Shell">Shell</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                    <input type="number" th:field="*{skillDto.per3}" min="0" max="100" placeholder="역량을 백분위로 나타내주세요." step="5" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="skill4">기술스택4</label>
+                    <select th:id="skill4" th:field="*{skillDto.skill4}" class="form-control">
+                        <option value="none">기술 스택4</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Java">Java</option>
+                        <option value="Golang">Golang</option>
+                        <option value="Python">Python</option>
+                        <option value="C#">C#</option>
+                        <option value="C++">C++</option>
+                        <option value="Erlang">Erlang</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Scala">Scala</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Rust">Rust</option>
+                        <option value="R">R</option>
+                        <option value="MATLAB">MATLAB</option>
+                        <option value="Perl">Perl</option>
+                        <option value="Lua">Lua</option>
+                        <option value="Groovy">Groovy</option>
+                        <option value="Shell">Shell</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                    <input type="number" th:field="*{skillDto.per4}" min="0" max="100" placeholder="약량을 백분위로 나타내주세요." step="5" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="facebook">Facebook 주소:</label>
+                    <input type="text" th:field="*{resumeDto.facebook}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="instagram">Instagram 주소:</label>
+                    <input type="text" th:field="*{resumeDto.instagram}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="github">Github 주소:</label>
+                    <input type="text" th:field="*{resumeDto.github}" class="form-control">
+                </div>
+                <hr/>
+                <h3 class="text-center mt-5">고등학교 정보</h3>
+                <div class="form-group">
+                    <label th:for="highName">학교명:</label>
+                    <input type="text" th:field="*{educationDto.highName}"  class="form-control">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <label th:for="highStart">입학연도:</label>
+                        <select id="highStart" th:field="*{educationDto.highStart}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.highStart}" th:text="${resumeFormDto.educationDto.highStart}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                    <div style="width: 20px; align-self: flex-end; text-align: center;">
+                        ~
+                    </div>
+                    <div style="flex: 1;">
+                        <label th:for="highEnd">졸업연도:</label>
+                        <select id="highEnd" th:field="*{educationDto.highEnd}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.highEnd}" th:text="${resumeFormDto.educationDto.highEnd}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr/>
+                <h3 class="text-center mt-5">대학교 정보</h3>
+                <div class="form-group">
+                    <label th:for="educationDto.uniName">학교명:</label>
+                    <input type="text" th:field="*{educationDto.uniName}" class="form-control">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <label th:for="uniStart">입학연도:</label>
+                        <select th:id="uniStart" th:field="*{educationDto.uniStart}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.uniStart}" th:text="${resumeFormDto.educationDto.uniStart}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                    <div style="width: 20px; text-align: center; align-self: flex-end;">
+                        ~
+                    </div>
+                    <div style="flex: 1;">
+                        <label th:for="uniEnd">졸업연도:</label>
+                        <select th:id="uniEnd" th:field="*{educationDto.uniEnd}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.uniEnd}" th:text="${resumeFormDto.educationDto.uniEnd}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                </div>
+                <hr/>
+                <h3 class="text-center mt-5">대학원 정보</h3>
+                <div class="form-group">
+                    <label th:for="gradName">학교명:</label>
+                    <input type="text" th:field="*{educationDto.gradName}" class="form-control">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <label th:for="gradStart">입학연도:</label>
+                        <select th:id="gradStart" th:field="*{educationDto.gradStart}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.gradStart}" th:text="${resumeFormDto.educationDto.gradStart}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                    <div style="width: 20px; text-align: center; align-self: flex-end;">
+                        ~
+                    </div>
+                    <div style="flex: 1;">
+                        <label th:for="gradEnd">졸업연도:</label>
+                        <select th:id="gradEnd" th:field="*{educationDto.gradEnd}" class="form-control">
+                            <option th:value="${resumeFormDto.educationDto.gradEnd}" th:text="${resumeFormDto.educationDto.gradEnd}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                </div>
+                <hr/>
+                <h3 class="text-center mt-5">수상내역</h3>
+                <div class="form-group">
+                    <label th:for="awardName1">수상내역1:</label>
+                 <input type="text" th:field="*{awardsDto.awardName1}" class="form-control"><br>
+                </div>
+                <div class="form-group">
+                    <label th:for="awardName2">수상내역2:</label>
+                    <input type="text" th:field="*{awardsDto.awardName2}" class="form-control"><br>
+                </div>
+                <div class="form-group">
+                    <label th:for="awardName3">수상내역3:</label>
+                    <input type="text"  th:field="*{awardsDto.awardName3}" class="form-control"><br>
+                </div>
+                <div class="form-group">
+                    <label th:for="awardName4">수상내역4:</label>
+                    <input type="text" th:field="*{awardsDto.awardName4}" class="form-control"><br>
+                </div>
+                <hr/>
+                <h3 class="text-center mt-5">경력사항</h3>
+                <div class="form-group">
+                    <label th:for="companyName">회사이름:</label>
+                    <input type="text" th:field="*{careerDto.companyName}" class="form-control">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <label th:for="startYear">근무기간:</label>
+                        <select th:id="startYear" th:field="*{careerDto.startYear}" class="form-control">
+                            <option th:value="${resumeFormDto.careerDto.startYear}" th:text="${resumeFormDto.careerDto.startYear}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                    <div style="width: 20px; text-align: center; align-self: flex-end;">
+                        ~
+                    </div>
+                    <div style="flex: 1;">
+                        <label>&nbsp</label>
+                        <select th:id="endYear" th:field="*{careerDto.endYear}" class="form-control">
+                            <option th:value="${resumeFormDto.careerDto.endYear}" th:text="${resumeFormDto.careerDto.endYear}"></option>
+                            <option value="">현재</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label th:for="position">직책:</label>
+                 <input type="text" th:field="*{careerDto.position}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="detail">상세내용:</label>
+                    <textarea class="form-control"  th:field="*{careerDto.detail}" placeholder="부여설명을 추가해주세요." cols="50" rows="10"></textarea>
+                </div>
+                <button type="submit" class="btn btn-block">저장</button>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    $('#skill1, #skill2, #skill3, #skill4').on('change', function() {
+                        let selectedValues = [];
+                        let currentSelect = this;
+                        $('#skill1, #skill2, #skill3, #skill4').each(function() {
+                            if (this !== currentSelect) {
+                                let selectedValue = $(this).val();
+                                if (selectedValue) {
+                                    selectedValues.push(selectedValue);
+                                }
+                            }
+                        });
+
+                        let currentValue = $(currentSelect).val();
+                        if (currentValue && $.inArray(currentValue, selectedValues) !== -1) {
+                            alert("중복된 기술스택이 선택되었습니다.");
+                            $(currentSelect).val('');
+                        }
+                    });
+                });
+
+                let startYear = 1960;
+                let endYear = 2023;
+
+                let yearSelects = ['highStart', 'highEnd', 'uniStart', 'uniEnd', 'gradStart', 'gradEnd', 'startYear', 'endYear'];
+
+                for(let i = 0; i < yearSelects.length; i++) {
+                    let select = document.getElementById(yearSelects[i]);
+
+                    for(let year = startYear; year <= endYear; year++) {
+                        let option = document.createElement("option");
+                        option.text = year;
+                        option.value = year;
+                        select.appendChild(option);
+                    }
+                }
+            </script>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </div>
+</section>
+</body>
+</html>

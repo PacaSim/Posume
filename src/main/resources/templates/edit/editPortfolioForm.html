@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .form-control {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .container {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        #profile_img_upload1, #profile_img_upload2, #profile_img_upload3 {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        #profile_img_upload1 + label,
+        #profile_img_upload2 + label,
+        #profile_img_upload3 + label {
+            border: 1px solid #d9e1e8;
+            background-color: #fff;
+            color: #2b90d9;
+            border-radius: 2rem;
+            padding: 8px 17px 8px 17px;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 1px 2px 3px 0px #f2f2f2;
+            outline: none;
+        }
+
+        #profile_img_upload1:focus + label, #profile_img_upload1 + label:hover,
+        #profile_img_upload2:focus + label, #profile_img_upload2 + label:hover,
+        #profile_img_upload3:focus + label, #profile_img_upload3 + label:hover {
+            cursor: pointer;
+        }
+
+        .file-path {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        #preview1, #preview2, #preview3 {
+            width: 30%;
+            height: 30%;
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+    </style>
+    </th:block>
+
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+
+        <script th:inline="javascript">
+            $(document).ready(function(){
+                let errorMessage = [[${errorMessage}]];  // [[${errorMessage}]] : 변수 내용 출력
+                if(errorMessage != null){
+                    alert(errorMessage);
+                }
+            });
+
+        </script>
+    </th:block>
+</head>
+<body>
+<section style="display: flex;">
+    <div layout:fragment="content">
+        <div class="container">
+            <h2 class="text-center mt-5">포트폴리오 관리</h2>
+            <form role="form" method="post" enctype="multipart/form-data" th:object="${portfolioDto}">
+                <div class="form-group">
+            <label th:for="title">프로젝트명:</label>
+            <input type="text" th:field="*{title}" class="form-control">
+                </div>
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
+                <!-- HTML -->
+                <div th:if="${#lists.isEmpty(portfolioDto.portImgDtoList)}">
+                <div class="form-group" th:each="num: ${#numbers.sequence(1,3)}">
+                    <label th:for="portImg" th:text="'프로젝트 이미지'+${num}"></label>
+                    <input type='file' name="projectImgFile" accept='image/jpg,image/png,image/jpeg,image/gif' th:id="'profile_img_upload'+${num}"/>
+                    <label th:for="'profile_img_upload'+${num}"><i class="far fa-file-image"/>&nbsp;파일 선택</label>
+                    <span th:id="'file-path'+${num}" class="file-path"></span>
+                    <img th:id="'preview'+${num}" src="" alt="Image preview" style="display:none;"/>
+                </div>
+                </div>
+
+                <!-- JavaScript -->
+                <script>
+                    for (let i = 1; i <= 3; i++) {
+                        document.getElementById('profile_img_upload' + i).onchange = function (e) {
+                            const filePath = e.target.value;
+                            const fileName = filePath.split('\\').pop();
+                            document.getElementById('file-path' + i).innerText = fileName;
+
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                document.getElementById('preview' + i).src = e.target.result;
+                                document.getElementById('preview' + i).style.display = 'block';
+                            };
+                            reader.readAsDataURL(e.target.files[0]);
+                        };
+                    }
+                </script>
+
+                <div class="form-group">
+                    <label th:for="category">카테고리:</label>
+                    <input th:field="*{category}" type="text"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label th:for="detail">프로젝트 상세설명:</label>
+                    <textarea th:field="*{detail}" cols="60" rows="10" class="form-control"></textarea>
+                </div>
+                <div th:if="${#strings.isEmpty(portfolioDto.id)}" style="text-align: center">
+                <button th:formaction="@{/edit/portfolio}" type="submit" class="btn btn-block">저장</button>
+    </form>
+</div>
+    </div>
+</section>
+</body>
+</html>

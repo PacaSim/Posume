@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Posume</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+<div th:replace="fragments/header::header"></div>
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex flex-column justify-content-center" sec:authorize="isAuthenticated()">
+
+  <nav id="navbar" class="navbar nav-menu" >
+    <ul>
+      <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+      <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+      <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
+      <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
+    </ul>
+  </nav><!-- .nav-menu -->
+
+</header><!-- End Header -->
+  <!-- ======= Mobile nav toggle button ======= -->
+  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
+  <i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Posume</h1>
+      <p>I'm <span class="typed" data-typed-items="이력서, 포트폴리오"></span></p>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about" sec:authorize="isAuthenticated()">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About</h2>
+          </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <img th:src="@{${imgurl}}" width="600" height="770" class="img-fluid" alt="프로필 사진">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content">
+            <h3 th:text="${MemberFormDto.keyword}"></h3>
+            <p> &nbsp  </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>이름:</strong> <span th:text="${MemberFormDto.name}">010-3547-5311</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>전화번호:</strong> <span th:text="${MemberFormDto.phoneNumber}">010-3547-5311</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>거주지:</strong> <span th:text="${MemberFormDto.address}">안산시</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>나이:</strong> <span th:text="${MemberFormDto.age}">23</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>최종학력:</strong> <span th:text="${MemberFormDto.academic_background}">고졸</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>이메일:</strong> <span th:text="${MemberFormDto.email}"></span></li>
+                </ul>
+                <p> &nbsp  </p>
+              </div>
+            </div >
+            <h3>자기소개</h3>
+            <p> &nbsp  </p>
+            <div style="border:1px solid #728394; height: 200px; width: 100%;">
+            <p th:text="${MemberFormDto.introduction}"></p>
+            </div>
+          </div>
+        </div>
+        <div class="social" th:if="${resumeDto != null}">
+          <a th:if="${!#strings.isEmpty(resumeDto.facebook)}" th:href="'https://' + ${resumeDto.getFacebook()}" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a th:if="${!#strings.isEmpty(resumeDto.instagram)}" th:href="'https://' + ${resumeDto.getInstagram()}" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a th:if="${!#strings.isEmpty(resumeDto.github)}" th:href= "'https://' + ${resumeDto.getGithub()}" class="github"><i class="bx bxl-github"></i></a>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Skills Section ======= -->
+    <section id="skills" class="skills section-bg" sec:authorize="isAuthenticated()">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Skills</h2>
+          <p>자신의 기술 스택을 나타내주세요.</p>
+        </div>
+
+        <div class="row skills-content" th:if="${SkillDto != null}">
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill" th:text="${SkillDto.skill1}">HTML <i class="val" th:text="${SkillDto.per1} + '%'">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" th:attr="aria-valuenow=${SkillDto.per1}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill" th:text="${SkillDto.skill2}">CSS <i class="val" th:text="${SkillDto.per2} + '%'">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" th:attr="aria-valuenow=${SkillDto.per2}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <div class="progress">
+              <span class="skill" th:text="${SkillDto.skill3}">JavaScript <i class="val" th:text="${SkillDto.per3} + '%'">75%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" th:attr="aria-valuenow=${SkillDto.per3}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill" th:text="${SkillDto.skill4}">PHP <i class="val" th:text="${SkillDto.per4} + '%'">80%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" th:attr="aria-valuenow=${SkillDto.per4}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Skills Section -->
+
+    <!-- ======= Resume Section ======= -->
+    <section id="resume" class="resume" sec:authorize="isAuthenticated()">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Resume</h2>
+          <p>이력서를 작성해주세요.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6" th:if="${educationDto != null}">
+            <h3 class="resume-title">학력사항</h3>
+            <div class="resume-item">
+              <h4>고등학교</h4>
+              <h5 th:text="${educationDto.highStart} + '-' + ${educationDto.highEnd}"></h5>
+              <p><em th:if="${!#strings.isEmpty(educationDto.highName)}" th:text="${educationDto.highName}"></em></p>
+            </div>
+            <div class="resume-item">
+              <h4>대학교</h4>
+              <h5 th:text="${educationDto.uniStart} + '-' + ${educationDto.uniEnd}"></h5>
+              <p><em th:if="${!#strings.isEmpty(educationDto.uniName)}" th:text="${educationDto.uniName}"></em></p>
+            </div>
+            <div class="resume-item">
+              <h4>대학원</h4>
+              <h5 th:text="${educationDto.gradStart} + '-' + ${educationDto.gradEnd}"></h5>
+              <p><em th:if="${!#strings.isEmpty(educationDto.gradName)}" th:text="${educationDto.gradName}"></em></p>
+            </div>
+          <h3 class="resume-title">수상내역</h3>
+          <div class="resume-item" th:if="${awardsDto != null}">
+            <ul>
+              <li th:if="${!#strings.isEmpty(awardsDto.awardName1)}" th:text="${awardsDto.awardName1}"></li>
+              <li th:if="${!#strings.isEmpty(awardsDto.awardName2)}" th:text="${awardsDto.awardName2}"></li>
+              <li th:if="${!#strings.isEmpty(awardsDto.awardName3)}" th:text="${awardsDto.awardName3}"></li>
+              <li th:if="${!#strings.isEmpty(awardsDto.awardName4)}" th:text="${awardsDto.awardName4}"></li>
+            </ul>
+          </div>
+        </div>
+          <div class="col-lg-6">
+            <h3 class="resume-title" th:if="${careerDto != null}">경력사항</h3>
+            <div class="resume-item" th:if="${careerDto != null}">
+              <h4 th:if="${!#strings.isEmpty(careerDto.companyName)}" th:text="${careerDto.companyName}"></h4>
+              <h5>2019 - Present</h5>
+              <p><em th:if="${!#strings.isEmpty(careerDto.position)}" th:text="${careerDto.position}"></em></p>
+              <ul>
+                <li th:if="${!#strings.isEmpty(careerDto.detail)}" th:text="${careerDto.detail}"></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      </div>
+    </section><!-- End Resume Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio section-bg" sec:authorize="isAuthenticated()">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>자신의 포트폴리오를 추가하세요.</p>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" th:if="${portfolioDtos != null}" th:each="portfolioDto : ${portfolioDtos}">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl1 != null}">
+            <div class="portfolio-wrap">
+              <img th:src="@{${imgurl1}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4 th:text="${portfolioDto.title}"></h4>
+                <p th:text="${portfolioDto.category}"></p>
+                <div class="portfolio-links">
+                  <a th:href="@{${imgurl1}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl2 != null}">
+            <div class="portfolio-wrap">
+              <img th:src="@{${imgurl2}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4 th:text="${portfolioDto.title}"></h4>
+                <p th:text="${portfolioDto.category}"></p>
+                <div class="portfolio-links">
+                  <a th:href="@{${imgurl2}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl3 != null}">
+            <div class="portfolio-wrap">
+              <img th:src="@{${imgurl3}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4 th:text="${portfolioDto.title}"></h4>
+                <p th:text="${portfolioDto.category}"></p>
+                <div class="portfolio-links">
+                  <a th:href="@{${imgurl3}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" th:if="${portfolioDto != null}">
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl4 != null}">
+              <div class="portfolio-wrap">
+                <img th:src="@{${imgurl4}}" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4 th:text="${portfolioDto.title}"></h4>
+                  <p th:text="${portfolioDto.category}"></p>
+                  <div class="portfolio-links">
+                    <a th:href="@{${imgurl4}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl5 != null}">
+              <div class="portfolio-wrap">
+                <img th:src="@{${imgurl5}}" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4 th:text="${portfolioDto.title}"></h4>
+                  <p th:text="${portfolioDto.category}"></p>
+                  <div class="portfolio-links">
+                    <a th:href="@{${imgurl5}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app" th:if="${imgurl6 != null}">
+              <div class="portfolio-wrap">
+                <img th:src="@{${imgurl6}}" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4 th:text="${portfolioDto.title}"></h4>
+                  <p th:text="${portfolioDto.category}"></p>
+                  <div class="portfolio-links">
+                    <a th:href="@{${imgurl6}}" data-gallery="portfolioGallery" class="portfolio-lightbox" th:attr="title=${portfolioDto.detail}"><i class="bx bx-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <hr>
+        </div>
+      </div>
+      </div>
+    </section><!-- End Portfolio Section -->
+
+  </main><!-- End #main -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/typed.js/typed.umd.js"></script>
+  <script src="/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+  <div th:replace="fragments/footer::footer"></div>
+
+</body>
+
+</html>

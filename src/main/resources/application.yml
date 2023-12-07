@@ -1,0 +1,57 @@
+server:
+  port: 80
+
+
+spring:
+  application:
+    name: spring-posume
+
+  devtools:
+    restart:
+      enabled: false
+
+    livereload:
+      cache: true
+
+    thymeleaf:
+      cache: false
+
+#############################
+  # MySql setting
+#############################
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/posume?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 1234
+
+#############################
+  # JPA Setting
+#############################
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+########################
+# security
+########################
+  security:
+    user:
+      name: test@test.com
+      password: 1111
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+imgLocation: D:/posume/item/
+uploadPath: file:///D:/posume/
