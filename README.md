@@ -15,5 +15,5 @@
 ![image](https://github.com/PacaSim/Posume/assets/116507879/f6ec62eb-c377-4c7c-94a1-2eb4e7cda4e7)
 
 ## 활용 기술
-Spring-boot 3.1.6  
-springsecurity6
+- Spring-boot 3.1.6  
+- springsecurity6
