@@ -10,7 +10,7 @@
 
 ## 시연
 ![image](https://github.com/PacaSim/Posume/assets/116507879/32705a5a-717e-4c0f-99fb-aef75056a8f7)
-![image](https://github.com/PacaSim/Posume/assets/116507879/c5c6b42b-fb54-4e12-866d-d9f20beb7d4b)
+![image](https://github.com/PacaSim/Posume/assets/116507879/a7f0f802-62e7-41c5-90ed-1f68665ad247)
 ![image](https://github.com/PacaSim/Posume/assets/116507879/21fde572-b21c-4578-8b7a-db3386e86e94)
 ![image](https://github.com/PacaSim/Posume/assets/116507879/f6ec62eb-c377-4c7c-94a1-2eb4e7cda4e7)
 
